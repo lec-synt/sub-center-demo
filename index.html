@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta name="google-site-verification" content="ftFOlJETX-2KNjaPh8W6s8lhigItRuu9fOmjHZZ0nY0" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <title>We Need Variations in Speech Synthesis:
+    Sub-center Modelling for Speaker Embeddings</title>
+</head>
+<style type="text/css">
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  audio {
+    width: 100%;
+  }
+
+  thead>tr>th:first-child {
+    width: 96px;
+  }
+
+  @media (max-width: 767px) {
+    .big-screen {
+      display: none;
+    }
+  }
+
+  @media (min-width: 767px) {
+    .small-screen {
+      display: none;
+    }
+  }
+  .column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+/* Clear floats after image containers */
+</style>
+
+<body>
+  <header class="header">
+    <div class="jumbotron bg-secondary text-center">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <h1><a class="text-light">We Need Variations in Speech Synthesis:<br>
+              Sub-center Modelling for Speaker Embeddings </h1><br>
+             <font size=5><span style="color:#FFFFFF"> Anonymous submission to Interspeech 2024 </font>   </a>  
+              
+            <p>
+              <div class="row">
+              </div>
+            </p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <b> Abstract: </b> In speech synthesis, modeling of rich emotions and prosodic variations present in human voice are crucial to synthesize natural speech. Although speaker embeddings have been widely used in personalized speech synthesis as conditioning inputs, they are designed to lose variation to optimize speaker recognition accuracy. Thus, they are suboptimal for speech synthesis in terms of modeling the rich variations at the output speech distribution. In this work, we propose a novel speaker embedding network which utilizes multiple class centers in the speaker classification training rather than a single class center as traditional embeddings. The proposed approach introduces variations in the speaker embedding while retaining the speaker recognition performance since model does not have to map all of the utterances of a speaker into a single class center. We apply our proposed embedding in voice conversion task and show that our method provides better naturalness and prosody in synthesized speech.
+
+
+    <div class="container">
+      <div class="row" id="arch">
+        <div class="col-md-12">
+          <h2>------------------>   Sub-center Speaker Embeddings for Voice Conversion   <--------</h2>
+          <br />
+          <div class="column" style="padding-right:30px;">
+                    <img src="./interspeech24_subcenter.png"  width="450" height="450" / > <p>
+                      <figcaption style="text-align:left;"></font><font size=3> 
+                        Figure 1: Proposed sub-center modeling(beige) on ECAPA-TDNN[1] network</font>
+                      </figcaption><br>
+                    </div>
+                    <div class="column">
+                        <img src="./interspeech24_vc.png"  width="750" height="450" / > <p>
+                          <figcaption style="text-align:center;position: absolute;"></font><font size=3> 
+                            Figure 2: VC framework[2] that utilizes proposed sub-center speaker embeddings</font>
+                          </figcaption><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="result">
+                    <div class="col-md-12">
+                  <div class="big-screen">
+                    
+                     <h2>----------------------------->   Speech Samples  <---------------------------</h2>
+
+                     </thead> <b>Experimental Setup:</b><p>
+                        <h6> The samples are from speakers that are unseen during the VC training. For each conversion, a random reference utterance from target speaker(~3s) is used </h6>
+                    <h6> <b>Methods:</b> 
+                        <ul>
+                            <li>VC with baseline ECAPA-TDNN [1,2]</li>
+                            <li>VC with Sub-center ECAPA-TDNN, C=10, T=0.1 (less intra-class variance)</li>
+                            <li>Proposed Method: VC with Sub-center ECAPA-TDNN, C=20 (more intra-class variance)</li>
+                          </ul>
+                       </h6>
+
+                     
+<br /><br />
+
+<br>
+                        <h2 style="text-decoration: underline;">Zero-shot Voice Conversion</h2>
+                        <br>
+                      <table class="table">
+
+             
+                         
+                        </tr>
+
+
+                      <tbody>
+                                
+                                
+                                <tr>
+                                    <th></th>
+                                    <th style="text-align:center;">   Ground-Truth</th>
+                                    <th style="text-align:center;">   VC with Baseline ECAPA-TDNN[1,2]</th>
+                                    <th style="text-align:center;">   VC with Sub-center ECAPA-TDNN, C=10, T=0.1 (less intra-class variance)</th>
+                                    <th style="text-align:center;">   Proposed Method: VC with Sub-center ECAPA-TDNN, C=20 (more intra-class variance)</th>
+		    
+                              
+                          
+                                </tr>
+		 <!-- single sentence -->
+                                                                  </tr>
+                                   <th colspan=5><h4> Female-to-Male</h4></th>
+                               </tr>
+                                <!-- single sentence -->
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"> <b>Source:</b> p229</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p229_139_mic1_p345_source.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"> <b>Target:</b> p345</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p229_139_mic1_p345_target.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/baseline/p229_139_mic1_p345.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcentertemp01/p229_139_mic1_p345.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcenter_20/p229_139_mic1_p345.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                                                  <!-- single sentence -->
+
+                                                                  <tr>
+                                  <th scope="row">    </th>
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"><b>Source:</b> p308</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p308_329_mic1_p260_source.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"><b>Target:</b> p260</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p308_329_mic1_p260_target.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/baseline/p308_329_mic1_p260.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcentertemp01/p308_329_mic1_p260.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcenter_20/p308_329_mic1_p260.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                  <!-- single sentence -->
+
+                              
+                                                                                                 </tr>
+                                  <th colspan=5><h4> Female-to-Female</h4></th>
+                               </tr>
+                                <!-- single sentence -->
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"><b>Source:</b> p329</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p329_386_mic1_p305_source.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"><b>Target:</b> p305</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p329_386_mic1_p305_target.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/baseline/p329_386_mic1_p305.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcentertemp01/p329_386_mic1_p305.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcenter_20/p329_386_mic1_p305.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                                                  <!-- single sentence -->
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"><b>Source:</b> p265</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p265_016_mic1_s5_source.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"><b>Target:</b> s5</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p265_016_mic1_s5_target.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/baseline/p265_016_mic1_s5.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcentertemp01/p265_016_mic1_s5.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcenter_20/p265_016_mic1_s5.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                  <!-- single sentence -->
+
+                                
+		                                                                                                 </tr>
+                                  <th colspan=5><h4> Male-to-Female</h4></th>
+                              </tr>
+                                <!-- single sentence -->
+
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"><b>Source:</b> p260</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p260_039_mic1_p310_source.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"><b>Target:</b> p310</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p260_039_mic1_p310_target.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/baseline/p260_039_mic1_p310.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcentertemp01/p260_039_mic1_p310.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcenter_20/p260_039_mic1_p310.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                            
+
+                                                                  <!-- single sentence -->
+                                                                <tr>
+                                  <th scope="row">    </th>
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"><b>Source:</b> 246</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p246_024_mic1_p305_source.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"><b>Target:</b> 305</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p246_024_mic1_p305_target.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/baseline/p246_024_mic1_p305.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcentertemp01/p246_024_mic1_p305.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcenter_20/p246_024_mic1_p305.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                                                  <!-- single sentence -->
+
+                               
+                                </tr>
+                                <th colspan=5><h4> Male-to-Male</h4></th>
+                               </tr>
+                                <tr>
+                                  <th scope="row">    </th>
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"><b>Source:</b> p298</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p298_011_mic1_p345_source.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td style="display: flex; align-items: center;"> 
+                                    <span style="margin-right: 10px;"><b>Target:</b> p345</span>
+                                    <audio controls>
+                                      <source src="samples/baseline/p298_011_mic1_p345_target.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/baseline/p298_011_mic1_p345.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcentertemp01/p298_011_mic1_p345.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="samples/subcenter_20/p298_011_mic1_p345.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+
+
+
+                                  <tr>
+                                    <th scope="row">    </th>
+                                    <td style="display: flex; align-items: center;"> 
+                                      <span style="margin-right: 10px;"><b>Source:</b> p246</span>
+                                      <audio controls>
+                                        <source src="samples/baseline/p246_051_mic1_p260_source.wav" type="audio/wav" />
+                                        Your browser does not support the audio element.
+                                      </audio>
+                                    </td>
+  
+                                    <td style="display: flex; align-items: center;"> 
+                                      <span style="margin-right: 10px;"><b>Target:</b> p260</span>
+                                      <audio controls>
+                                        <source src="samples/baseline/p246_051_mic1_p260_target.wav" type="audio/wav" />
+                                        Your browser does not support the audio element.
+                                      </audio>
+                                    </td>
+                                    <td>
+                                      <audio controls>
+                                        <source src="samples/baseline/p246_051_mic1_p260.wav" type="audio/wav" />
+                                        Your browser does not support the audio element.
+                                      </audio>
+                                    </td>
+                                    <td>
+                                      <audio controls>
+                                        <source src="samples/subcentertemp01/p246_051_mic1_p260.wav" type="audio/wav" />
+                                        Your browser does not support the audio element.
+                                      </audio>
+                                    </td>
+                                    <td>
+                                      <audio controls>
+                                        <source src="samples/subcenter_20/p246_051_mic1_p260.wav" type="audio/wav" />
+                                        Your browser does not support the audio element.
+                                      </audio>
+                                    </td>
+                      </tbody>
+                       
+
+                    
+
+
+                    <tr></tr>
+                        </table>
+                      </div>
+ </div>
+
+[1] Brecht Desplanques, Jenthe Thienpondt, & Kris Demuynck (2020). ECAPA-TDNN: Emphasized Channel Attention, Propagation and Aggregation in TDNN Based Speaker Verification. In Proc. Interspeech 2020 (pp. 3830–3834).
+ <br>
+[2] Adam Polyak, Yossi Adi, Jade Copet, Eugene Kharitonov, Kushal Lakhotia, Wei-Ning Hsu, Abdelrahman Mohamed, & Emmanuel Dupoux (2021). Speech Resynthesis from Discrete Disentangled Self-Supervised Representations. In Proc. Interspeech 2021 (pp. 3615–3619).
+<p>
+
+
+
+
+
+                  </div>
+                 
+        </div>
+      </div>
+      <hr>
+      <div class="row" id="ref">
+        <div class="col">
+          <!--<h2>References</h2>
+          
+         -->
+        </div>
+      </div>
+      <hr>
+      <!-- <div class="row" id="contact">
+          <div class="col">
+            <h2>Contact</h2>
+            <div></div>
+          </div>
+        </div> -->
+    </div>
+  </main>
+  <footer class="bg-secondary text-light mt-4 pt-3 pb-2 ">
+    <div class="container">
+      <p class="text-center">
+        
+      </p>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
