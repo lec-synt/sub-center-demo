@@ -50,15 +50,19 @@
 
 <body>
   <header class="header">
-    <div class="jumbotron bg-secondary text-center">
+    <div class="jumbotron text-center" style="background-color: #002D72;">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-12">
-            <h1><a class="text-light">We Need Variations in Speech Synthesis:<br>
-              Sub-center Modelling for Speaker Embeddings </h1><br>
-             <font size=5><span style="color:#FFFFFF"> Authors: Ismail Rasim Ulgen, Carlos Busso, John H. L. Hansen and Berrak Sisman </font>   </a>  
-              
-            <p>
+            <h1><a class="text-light">RETHINKING SPEAKER EMBEDDINGS FOR SPEECH GENERATION: <br>
+              SUB-CENTER MODELING FOR CAPTURING INTRA-SPEAKER DIVERSITY</h1><br>
+             <font size=5><span style="color:#FFFFFF"> <i>Ismail Rasim Ulgen<sup>1</sup> , John H. L. Hansen<sup>2</sup>,  Carlos Busso<sup>3</sup> and Berrak Sisman<sup>1</sup></i> </font>   </a> <br> 
+                <font size=4><span style="color:#FFFFFF">  <sup>1</sup> Center for Language and Speech Processing (CLSP), Johns Hopkins University, USA</font>   </a> <br>
+
+                <font size=4><span style="color:#FFFFFF">  <sup>2</sup> Center for Robust Speech Systems (CRSS), The University of Texas at Dallas, USA</font>   </a> <br>
+            
+                <font size=4><span style="color:#FFFFFF"> <sup>3</sup> Language Technologies Institute (LTI), Carnegie Mellon University, USA </font>   </a> <br>
+                  <p>
               <div class="row">
               </div>
             </p>
@@ -69,8 +73,7 @@
     </div>
   </header>
   <main>
-   <p style="padding-left: 20px;"> <b> Abstract: </b> In speech synthesis, modeling of rich emotions and prosodic variations present in human voice are crucial to synthesize natural speech. Although speaker embeddings have been widely used in personalized speech synthesis as conditioning inputs, they are designed to lose variation to optimize speaker recognition accuracy. Thus, they are suboptimal for speech synthesis in terms of modeling the rich variations at the output speech distribution. In this work, we propose a novel speaker embedding network which utilizes multiple class centers in the speaker classification training rather than a single class center as traditional embeddings. The proposed approach introduces variations in the speaker embedding while retaining the speaker recognition performance since model does not have to map all of the utterances of a speaker into a single class center. We apply our proposed embedding in voice conversion task and show that our method provides better naturalness and prosody in synthesized speech.
-   </p>
+   <p style="padding-left: 20px;"> <b> Abstract: </b> Modeling the rich prosodic variations inherent in human speech is essential for generating natural-sounding speech. While speaker embeddings are commonly used as conditioning inputs in personalized speech generation, they are typically optimized for speaker recognition, which encourages the loss of intra-speaker variation. This strategy makes them suboptimal for speech generation in terms of modeling the rich variations at the output speech distribution. In this work, we propose a novel speaker embedding network that employs multiple sub-centers per speaker class during training, instead of a single center as in conventional approaches. This sub-center modeling allows the embedding to capture a broader range of speaker-specific variations while maintaining speaker classification performance. We demonstrate the effectiveness of the proposed embeddings on a voice conversion task, showing improved naturalness and prosodic expressiveness in the synthesized speech.   </p>
 
    <div class="container">
     <div class="row" id="arch">
@@ -87,7 +90,7 @@
             </div>
             <div class="row">
                 <figure>
-                    <img src="./vc.png" width="300" height="450" />
+                    <img src="./vc.png" width="600" height="200" />
                     <figcaption style="text-align:left; font-size:16px;">
                         Figure 2: VC framework[2] that utilizes proposed sub-center speaker embeddings
                     </figcaption>
@@ -107,8 +110,8 @@
                     <h6> <b>Methods:</b> 
                         <ul>
                             <li>VC with baseline ECAPA-TDNN [1,2]</li>
-                            <li>VC with Sub-center ECAPA-TDNN, C=10, T=0.1 (less intra-class variance)</li>
-                            <li>Proposed Method: VC with Sub-center ECAPA-TDNN, C=20 (more intra-class variance)</li>
+                            <li>VC with Sub-center ECAPA-TDNN, C=10, T=0.1 (least intra-class variance)</li>
+                            <li>Proposed Method: VC with Sub-center ECAPA-TDNN, C=20 (most intra-class variance)</li>
                           </ul>
                        </h6>
                       </div>
@@ -132,8 +135,8 @@
                                     <th></th>
                                     <th style="text-align:center;">   Ground-Truth</th>
                                     <th style="text-align:center;">   VC with Baseline ECAPA-TDNN[1,2]</th>
-                                    <th style="text-align:center;">   VC with Sub-center ECAPA-TDNN, C=10, T=0.1 (less intra-class variance)</th>
-                                    <th style="text-align:center;">   Proposed Method: VC with Sub-center ECAPA-TDNN, C=20 (more intra-class variance)</th>
+                                    <th style="text-align:center;">   VC with Sub-center ECAPA-TDNN, C=10, T=0.1 (least intra-class variance)</th>
+                                    <th style="text-align:center;">   Proposed Method: VC with Sub-center ECAPA-TDNN, C=20 (most intra-class variance)</th>
 		    
                               
                           
